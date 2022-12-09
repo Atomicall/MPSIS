@@ -1,0 +1,205 @@
+#include <msp430.h> 
+#include "HAL_Dogs102x6.h"
+#include "HAL_Cma3000.h"
+
+// TIMER1_PERIOD_1MS = ACLK * 0.001с (ACLK = 32768 Гц)
+#define TIMER1_PERIOD_1MS 33
+
+// Хранение времени ожидания для функции Delay
+volatile uint16_t delay_ms = 0;
+
+// Прерывания таймера для задержки
+#pragma vector=TIMER1_A0_VECTOR
+__interrupt void TIMER1_A0_ISR(void)
+{
+
+    if (delay_ms == 0)
+    {
+        // Выход из LPM0 по завершении прерывания
+        _bic_SR_register_on_exit(LPM0_bits + GIE);
+        TA1CCTL0 &= ~CCIE;
+    }
+    else
+    {
+        delay_ms--;
+    }
+
+    // Сбрасываем флаг прерывания
+    TA1CCTL0 &= ~CCIFG;
+}
+
+void Delay(uint16_t time_ms)
+{
+    delay_ms = time_ms;
+
+    // Таймер для ожидания
+    TA1CCTL0 = CCIE;
+    TA1CCR0 = TIMER1_PERIOD_1MS - 1;
+    TA1CTL = TASSEL__ACLK + MC__UP + ID__1 + TACLR;
+    __bis_SR_register(LPM0_bits + GIE);
+}
+//
+//uint16_t
+
+void Dogs102x6_BoxDraw(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t style)
+{
+    Dogs102x6_horizontalLineDraw(x1, x2, y1, style);
+    Dogs102x6_horizontalLineDraw(x1, x2, y2, style);
+    Dogs102x6_verticalLineDraw(y1, y2, x1, style);
+    Dogs102x6_verticalLineDraw(y1, y2, x2, style);
+}
+
+#define BOX_X 7
+#define BOX_X_BETWEEN 3
+#define BOX_Y 11
+#define CHAR_LEFT_ALIGN 1
+
+#define TOP_HORIZONTAL_LINE0 (BOTTOM_HORIZONTAL_LINE0 - BOX_Y - 1)
+#define BOTTOM_HORIZONTAL_LINE0 (BOTTOM_HORIZONTAL_LINE1 - 16)
+#define TOP_HORIZONTAL_LINE1 (BOTTOM_HORIZONTAL_LINE1 - BOX_Y - 1)
+#define BOTTOM_HORIZONTAL_LINE1 (BOTTOM_HORIZONTAL_LINE2 - 16)
+#define TOP_HORIZONTAL_LINE2 (BOTTOM_HORIZONTAL_LINE2 - BOX_Y - 1)
+#define BOTTOM_HORIZONTAL_LINE2 57
+
+#define LEFT_VERTICAL_LINE0 (RIGHT_VERTICAL_LINE0 - BOX_X - 1)
+#define RIGHT_VERTICAL_LINE0 (LEFT_VERTICAL_LINE1 - BOX_X_BETWEEN - 1)
+#define LEFT_VERTICAL_LINE1 (RIGHT_VERTICAL_LINE1 - BOX_X - 1)
+#define RIGHT_VERTICAL_LINE1 (LEFT_VERTICAL_LINE2 - BOX_X_BETWEEN - 1)
+#define LEFT_VERTICAL_LINE2 (RIGHT_VERTICAL_LINE2 - BOX_X - 1)
+#define RIGHT_VERTICAL_LINE2 (LEFT_VERTICAL_LINE3 - BOX_X_BETWEEN - 1)
+#define LEFT_VERTICAL_LINE3 (RIGHT_VERTICAL_LINE3 - BOX_X - 1)
+#define RIGHT_VERTICAL_LINE3 100
+
+#define MS_BOX_X 13
+
+#define LEFT_VERTICAL_LINE_MS (RIGHT_VERTICAL_LINE_MS - 1 - MS_BOX_X)
+#define RIGHT_VERTICAL_LINE_MS (LEFT_VERTICAL_LINE_MR - BOX_X_BETWEEN - 1)
+#define LEFT_VERTICAL_LINE_MR (RIGHT_VERTICAL_LINE_MR - 1 - MS_BOX_X)
+#define RIGHT_VERTICAL_LINE_MR RIGHT_VERTICAL_LINE1
+
+#define CHAR_POS_ROW0 2
+#define CHAR_POS_ROW1 4
+#define CHAR_POS_ROW2 6
+
+#define CHAR_POS_COLUMN0 (LEFT_VERTICAL_LINE0 + CHAR_LEFT_ALIGN + 1)
+#define CHAR_POS_COLUMN1 (LEFT_VERTICAL_LINE1 + CHAR_LEFT_ALIGN + 1)
+#define CHAR_POS_COLUMN2 (LEFT_VERTICAL_LINE2 + CHAR_LEFT_ALIGN + 1)
+#define CHAR_POS_COLUMN3 (LEFT_VERTICAL_LINE3 + CHAR_LEFT_ALIGN + 1)
+#define CHAR_POS_MS (LEFT_VERTICAL_LINE_MS + CHAR_LEFT_ALIGN + 1)
+#define CHAR_POS_MR (LEFT_VERTICAL_LINE_MR + CHAR_LEFT_ALIGN + 1)
+
+uint8_t positions[3][4][4] =
+{
+ {
+  {LEFT_VERTICAL_LINE_MS, TOP_HORIZONTAL_LINE0, RIGHT_VERTICAL_LINE_MS, BOTTOM_HORIZONTAL_LINE0},
+  {LEFT_VERTICAL_LINE_MR, TOP_HORIZONTAL_LINE0, RIGHT_VERTICAL_LINE_MR, BOTTOM_HORIZONTAL_LINE0},
+  {LEFT_VERTICAL_LINE2, TOP_HORIZONTAL_LINE0, RIGHT_VERTICAL_LINE2, BOTTOM_HORIZONTAL_LINE0},
+  {LEFT_VERTICAL_LINE3, TOP_HORIZONTAL_LINE0, RIGHT_VERTICAL_LINE3, BOTTOM_HORIZONTAL_LINE0},
+ },
+ {
+  {0, 63, 0, 63},
+  {0, 63, 0, 63},
+  {LEFT_VERTICAL_LINE2, TOP_HORIZONTAL_LINE1, RIGHT_VERTICAL_LINE2, BOTTOM_HORIZONTAL_LINE1},
+  {LEFT_VERTICAL_LINE3, TOP_HORIZONTAL_LINE1, RIGHT_VERTICAL_LINE3, BOTTOM_HORIZONTAL_LINE1},
+ },
+ {
+   {LEFT_VERTICAL_LINE0, TOP_HORIZONTAL_LINE2, RIGHT_VERTICAL_LINE0, BOTTOM_HORIZONTAL_LINE2},
+   {LEFT_VERTICAL_LINE1, TOP_HORIZONTAL_LINE2, RIGHT_VERTICAL_LINE1, BOTTOM_HORIZONTAL_LINE2},
+   {LEFT_VERTICAL_LINE2, TOP_HORIZONTAL_LINE2, RIGHT_VERTICAL_LINE2, BOTTOM_HORIZONTAL_LINE2},
+   {LEFT_VERTICAL_LINE3, TOP_HORIZONTAL_LINE2, RIGHT_VERTICAL_LINE3, BOTTOM_HORIZONTAL_LINE2},
+  },
+};
+
+/**
+ * main.c
+ */
+int main(void)
+{
+	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
+	
+	// Инициализация экрана
+    Dogs102x6_init();
+    Dogs102x6_backlightInit();
+    Dogs102x6_setBacklight(255);
+    Dogs102x6_clearScreen();
+
+    Dogs102x6_horizontalLineDraw(0, DOGS102x6_X_SIZE - 1, 9, DOGS102x6_DRAW_NORMAL);
+    uint8_t x = 0;
+    uint8_t y = 0;
+
+    for (x = 0; x < 3; x++)
+    {
+        for (y = 0; y < 4; y++)
+        {
+            Dogs102x6_BoxDraw(positions[x][y][0], positions[x][y][1], positions[x][y][2], positions[x][y][3], DOGS102x6_DRAW_NORMAL);
+        }
+    }
+
+    Dogs102x6_charDraw(CHAR_POS_ROW0, CHAR_POS_COLUMN3, '/', DOGS102x6_DRAW_NORMAL);
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE3, TOP_HORIZONTAL_LINE1, RIGHT_VERTICAL_LINE3, BOTTOM_HORIZONTAL_LINE1, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_charDraw(CHAR_POS_ROW1, CHAR_POS_COLUMN3, '-', DOGS102x6_DRAW_NORMAL);
+
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE3, TOP_HORIZONTAL_LINE2, RIGHT_VERTICAL_LINE3, BOTTOM_HORIZONTAL_LINE2, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_charDraw(CHAR_POS_ROW2, CHAR_POS_COLUMN3, 'C', DOGS102x6_DRAW_NORMAL);
+
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE2, TOP_HORIZONTAL_LINE0, RIGHT_VERTICAL_LINE2, BOTTOM_HORIZONTAL_LINE0, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_charDraw(CHAR_POS_ROW0, CHAR_POS_COLUMN2, 'x', DOGS102x6_DRAW_NORMAL);
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE2, TOP_HORIZONTAL_LINE1, RIGHT_VERTICAL_LINE2, BOTTOM_HORIZONTAL_LINE1, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_charDraw(CHAR_POS_ROW1, CHAR_POS_COLUMN2, '+', DOGS102x6_DRAW_NORMAL);
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE2, TOP_HORIZONTAL_LINE2, RIGHT_VERTICAL_LINE2, BOTTOM_HORIZONTAL_LINE2, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_charDraw(CHAR_POS_ROW2, CHAR_POS_COLUMN2, '=', DOGS102x6_DRAW_NORMAL);
+
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE1, TOP_HORIZONTAL_LINE2, RIGHT_VERTICAL_LINE1, BOTTOM_HORIZONTAL_LINE2, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_charDraw(CHAR_POS_ROW2, CHAR_POS_COLUMN1, '1', DOGS102x6_DRAW_NORMAL);
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE0, TOP_HORIZONTAL_LINE2, RIGHT_VERTICAL_LINE0, BOTTOM_HORIZONTAL_LINE2, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_charDraw(CHAR_POS_ROW2, CHAR_POS_COLUMN0, '0', DOGS102x6_DRAW_NORMAL);
+
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE_MR, TOP_HORIZONTAL_LINE0, RIGHT_VERTICAL_LINE_MR, BOTTOM_HORIZONTAL_LINE0, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_stringDraw(CHAR_POS_ROW0, CHAR_POS_MR, "MR", DOGS102x6_DRAW_NORMAL);
+
+//    Dogs102x6_BoxDraw(LEFT_VERTICAL_LINE_MS, TOP_HORIZONTAL_LINE0, RIGHT_VERTICAL_LINE_MS, BOTTOM_HORIZONTAL_LINE0, DOGS102x6_DRAW_NORMAL);
+    Dogs102x6_stringDraw(CHAR_POS_ROW0, CHAR_POS_MS, "MS", DOGS102x6_DRAW_NORMAL);
+
+
+    Dogs102x6_charDraw(0, 80, '2', DOGS102x6_DRAW_NORMAL);
+
+    Cma3000_init();
+    while(1)
+    {
+        for (x = 0; x < 3; x++)
+        {
+            for (y = 0; y < 4; y++)
+            {
+                if (x == 1 && y >= 2)
+                    break;
+
+            }
+        }
+
+        for (x = 0; x < 3; x++)
+       {
+           for (y = 0; y < 4; y++)
+           {
+               if (x == 1 && y < 2)
+                   continue;
+               Dogs102x6_BoxDraw(positions[x][y][0], positions[x][y][1], positions[x][y][2], positions[x][y][3], DOGS102x6_DRAW_NORMAL);
+               Delay(1000);
+               Dogs102x6_BoxDraw(positions[x][y][0], positions[x][y][1], positions[x][y][2], positions[x][y][3], DOGS102x6_DRAW_INVERT);
+               Delay(1000);
+           }
+       }
+
+    }
+
+	return 0;
+}
+
+

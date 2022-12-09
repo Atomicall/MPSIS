@@ -1,0 +1,341 @@
+#include <msp430.h>
+#include <stdint.h>
+
+/* Функция для взаимодействия с GPIO */
+
+#define GPIO_DIR_OUTPUT(...)  GPIO_DIR_OUTPUT_SUB(__VA_ARGS__)
+#define GPIO_DIR_OUTPUT_SUB(port, pin) (P##port##DIR |= (1 << (pin)))
+
+#define GPIO_DIR_INPUT(...)  GPIO_DIR_OUTPUT_SUB(__VA_ARGS__)
+#define GPIO_DIR_INPUT_SUB(port, pin) (P##port##DIR &= ~(1 << (pin)))
+
+#define GPIO_PULLUP(...) GPIO_PULLUP_SUB(__VA_ARGS__)
+#define GPIO_PULLUP_SUB(port, pin) P##port##REN |= (1 << (pin)); \
+                                   P##port##OUT |= (1 << (pin))
+#define GPIO_PULLDOWN(...) GPIO_PULLDOWN_SUB(__VA_ARGS__)
+#define GPIO_PULLDOWN_SUB(port, pin) P##port##REN |= (1 << (pin)); \
+                                     P##port##OUT &= ~(1 << (pin))
+
+#define GPIO_NOPULL(...) GPIO_NOPULL_SUB(__VA_ARGS__)
+#define GPIO_NOPULL_SUB(port, pin) (P##port##REN &= ~(1 << (pin)))
+
+#define GPIO_READ_PIN(...) GPIO_READ_PIN_SUB(__VA_ARGS__)
+#define GPIO_READ_PIN_SUB(port, pin) ((P##port##IN & (1 << (pin))) ? 1 : 0)
+
+#define GPIO_WRITE_PIN(...) GPIO_WRITE_PIN_SUB(__VA_ARGS__)
+#define GPIO_WRITE_PIN_SUB(port, pin, value) (P##port##OUT = (P##port##OUT & ~(1 << (pin))) | (value << (pin)))
+
+#define GPIO_TOGGLE_PIN(...) GPIO_TOGGLE_PIN_SUB(__VA_ARGS__)
+#define GPIO_TOGGLE_PIN_SUB(port, pin) (P##port##OUT ^= (1 << (pin)))
+
+#define GPIO_TRIG_EDGE_FALLING(...) GPIO_TRIG_EDGE_FALLING_SUB(__VA_ARGS__)
+#define GPIO_TRIG_EDGE_FALLING_SUB(port, pin) (P##port##IES |= (1 << (pin)))
+
+#define GPIO_TRIG_EDGE_RISING(...) GPIO_TRIG_EDGE_RISING_SUB(__VA_ARGS__)
+#define GPIO_TRIG_EDGE_RISING_SUB(port, pin) (P##port##IES &= ~(1 << (pin)))
+
+#define GPIO_INTERRUPT_ENABLE(...) GPIO_INTERRUPT_ENABLE_SUB(__VA_ARGS__)
+#define GPIO_INTERRUPT_ENABLE_SUB(port, pin) P##port##IFG &= ~(1 << (pin)); \
+                                             P##port##IE |= (1 << (pin))
+
+#define GPIO_INTERRUPT_DISABLE(...) GPIO_INTERRUPT_DISABLE_SUB(__VA_ARGS__)
+#define GPIO_INTERRUPT_DISABLE_SUB(port, pin) (P##port##IE &= ~(1 << (pin)))
+
+#define GPIO_PERIPHERAL(...) GPIO_PERIPHERAL_SUB(__VA_ARGS__)
+#define GPIO_PERIPHERAL_SUB(port, pin) (P##port##SEL |= (1 << (pin)))
+
+#define GPIO_CLEAR_IT_FLAG(...) GPIO_CLEAR_IT_FLAG_SUB(__VA_ARGS__)
+#define GPIO_CLEAR_IT_FLAG_SUB(port, pin) (P##port##IFG &= ~(1 << (pin)))
+
+/********************************************************************/
+
+#define BUTTON_PRESSED   1
+#define BUTTON_UNPRESSED 0
+
+#define LED_ON  1
+#define LED_OFF 0
+
+#define EDGE_NONE    0
+#define EDGE_RISING  1
+#define EDGE_FALLING 2
+
+/* Порты и пины используемых кнопок и светодиодов */
+
+#define BUTT1_PORT  1
+#define BUTT1_PIN   7
+
+#define BUTT2_PORT  2
+#define BUTT2_PIN   2
+
+#define LED1_PORT  1
+#define LED1_PIN   0
+
+#define LED5_PORT  1
+#define LED5_PIN   2
+
+#define LED6_PORT  1
+#define LED6_PIN   3
+
+#define LED7_PORT  1
+#define LED7_PIN   4
+
+#define LED8_PORT  1
+#define LED8_PIN   5
+
+/*************************************************/
+/*Периоды таймеров*/
+
+// TIMER0_PERIOD_1S = ACLK/8 * 1с (ACLK = 40960 Гц)
+#define TIMER0_PERIOD_1S (5120)
+#define TIMER0_PERIOD_2S (TIMER0_PERIOD_1S * 2)
+
+// TIMER1_PERIOD_0_8S = ACLK/8 * 0.8с (ACLK = 40960 Гц)
+#define TIMER1_PERIOD_0_8S 4096
+#define TIMER1_PERIOD_1_6S (TIMER1_PERIOD_0_8S * 2)
+#define TIMER1_PERIOD_3_2S (TIMER1_PERIOD_0_8S * 4)
+
+// TIMER2_PERIOD_5MS = ACLK/8 * 0.005с (ACLK = 40960 Гц)
+#define TIMER2_PERIOD_5MS 26
+
+// TIMER2_PERIOD_5MS = ACLK/8 * 0.005с (ACLK = 40960 Гц)
+#define WATCHDOG_COUNT_0_8S 64
+#define WATCHDOG_COUNT_1_6S (WATCHDOG_COUNT_0_8S * 2)
+#define WATCHDOG_COUNT_3_2S (WATCHDOG_COUNT_0_8S * 4)
+
+/**************************************************/
+
+#define TIMER_SELECT    0
+#define WATCHDOG_SELECT 1
+
+volatile uint8_t timer_watchdog = 0;
+volatile uint16_t watchdog_count = 0;
+
+int main(void)
+{
+    // Остановка сторожевого таймера
+    WDTCTL = WDTPW | WDTHOLD;   
+
+
+    // Источник DCO FLL = REFOCLK
+    UCSCTL3 = SELREF__REFOCLK;                       // Set DCO FLL reference = REFO
+    // Источник для ACLK = DCOCLKDIV
+    UCSCTL4 |= SELA__DCOCLKDIV;
+    // ACLK = DCOCLKDIV / 32 = 1.31 МГц / 32 = 40960 Гц
+    UCSCTL5 &= ~(DIVA0 | DIVA1 | DIVA2);
+    UCSCTL5 |= DIVA__32;
+
+    // Отключаем FLL
+     __bis_SR_register(SCG0);
+
+     // Устанавливаем диапазон DCO = 0,32-0,75----3,17-7,38 МГц(31 страница даташита)
+     UCSCTL1 = DCORSEL_2;
+    // Диапазон MOD внутри DCORSEL = 0, FLL сам подстроится
+    UCSCTL0 = 0x0000;
+    // DCOCLK = D * FLLRef * (N + 1) = 2 * 32768 * (39 + 1) = 2.62 МГц
+    // MCLK = DCOCLKDIV = FLLRef * (N + 1) = 32768 * (39 + 1) = 1.31 МГц
+    UCSCTL2 = FLLD__2 + 39;
+
+
+    // Включаем FLL
+    __bic_SR_register(SCG0);
+
+    // Разрешаем прерывания ошибок осциллятора
+    SFRIE1 |= OFIE;
+
+    /*Настройка GPIO*/
+    GPIO_DIR_OUTPUT(LED1_PORT, LED1_PIN);
+    GPIO_DIR_OUTPUT(LED5_PORT, LED5_PIN);
+    GPIO_DIR_OUTPUT(LED6_PORT, LED6_PIN);
+    GPIO_DIR_OUTPUT(LED7_PORT, LED7_PIN);
+    GPIO_DIR_OUTPUT(LED8_PORT, LED8_PIN);
+
+    // LED8 подключается к выходу таймера A0.4
+    GPIO_PERIPHERAL(LED8_PORT, LED8_PIN);
+
+    GPIO_WRITE_PIN(LED1_PORT, LED1_PIN, LED_OFF);
+    GPIO_WRITE_PIN(LED5_PORT, LED5_PIN, LED_OFF);
+    GPIO_WRITE_PIN(LED6_PORT, LED6_PIN, LED_OFF);
+    GPIO_WRITE_PIN(LED7_PORT, LED7_PIN, LED_OFF);
+    GPIO_WRITE_PIN(LED8_PORT, LED8_PIN, LED_OFF);
+
+    GPIO_DIR_INPUT(BUTT1_PORT, BUTT1_PIN);
+    GPIO_PULLUP(BUTT1_PORT, BUTT1_PIN);
+    GPIO_DIR_INPUT(BUTT2_PORT, BUTT2_PIN);
+    GPIO_PULLUP(BUTT2_PORT, BUTT2_PIN);
+
+    /**************************************/
+
+    /*Настройка таймеров*/
+    //TA0CCR0     /|     /|
+    //           / |    / |
+    //          /  |   /  |
+    //TA0CCR4  /   |  /   |
+    //        / |  | / |  |
+    //       /     |/     |
+    //          |      |
+    //OUT        ______
+    //       ___|      |____
+    // Так как счет начинается с нуля то период равен TA0CCR0 - 1
+    TA0CCR0 = TIMER0_PERIOD_2S - 1;
+    TA0CCR4 = TIMER0_PERIOD_1S - 1;
+    // Режим выход 4(Переключение)
+    TA0CCTL4 = OUTMOD_4;
+    // Тактируется от ACLK/8, режим счета вверх, очищаем регистр TA0R
+    TA0CTL = TASSEL__ACLK | MC__UP | ID__8 | TACLR;
+
+    // Тактируется от ACLK/8, режим счета вверх, очищаем регистр TA0R,
+    TA1CTL = TASSEL__ACLK | MC__UP | TACLR | ID__8;
+
+    TA2CCTL0 = CCIE;
+    TA2CCR0 = TIMER2_PERIOD_5MS - 1;
+    TA2CTL = TASSEL__ACLK + MC__UP + ID__8 + TACLR; 
+    /********************/
+    __bis_SR_register(GIE);
+    __no_operation();
+
+    return 0;
+}
+
+
+#pragma vector=TIMER2_A0_VECTOR
+__interrupt void TIMER2_A0_ISR(void)
+{
+    static uint8_t b1_state = BUTTON_UNPRESSED;
+    static uint8_t b1_prev_state = BUTTON_UNPRESSED;
+    static uint8_t b2_state = BUTTON_UNPRESSED;
+    static uint8_t b2_prev_state = BUTTON_UNPRESSED;
+    static uint8_t b1_edge = 0;
+    static uint8_t b2_edge = 0;
+    b1_prev_state = b1_state;
+    b2_prev_state = b2_state;
+    b2_state = ~GPIO_READ_PIN(BUTT2_PORT, BUTT2_PIN) & 0x01;
+    if (b2_edge == EDGE_RISING)
+    {
+       if (b2_state == EDGE_RISING)
+       {
+           timer_watchdog ^= 1;
+           GPIO_TOGGLE_PIN(LED1_PORT, LED1_PIN);
+       }
+       b2_edge = EDGE_NONE;
+    }
+    else if (b2_state == BUTTON_PRESSED && b2_prev_state == BUTTON_UNPRESSED)
+    {
+       b2_edge = EDGE_RISING;
+    }
+
+    b1_state = ~GPIO_READ_PIN(BUTT1_PORT, BUTT1_PIN) & 0x01;
+    if (b1_edge == EDGE_RISING)
+    {
+        if (b1_state == BUTTON_PRESSED)
+        {
+            TA1CCTL0 &= ~CCIE;
+            TA1CCTL1 &= ~CCIE;
+            TA1CCTL2 &= ~CCIE;
+
+            SFRIE1 &= ~WDTIE;
+            WDTCTL = WDTPW | WDTHOLD;
+
+            watchdog_count = 0;
+            GPIO_WRITE_PIN(LED5_PORT, LED5_PIN, LED_ON);
+            GPIO_WRITE_PIN(LED6_PORT, LED6_PIN, LED_ON);
+            GPIO_WRITE_PIN(LED7_PORT, LED7_PIN, LED_ON);
+
+        }
+        b1_edge = EDGE_NONE;
+    }
+    else if (b1_edge == EDGE_FALLING)
+    {
+        if (b1_state == BUTTON_UNPRESSED)
+        {
+            GPIO_WRITE_PIN(LED5_PORT, LED5_PIN, LED_OFF);
+            GPIO_WRITE_PIN(LED6_PORT, LED6_PIN, LED_OFF);
+            GPIO_WRITE_PIN(LED7_PORT, LED7_PIN, LED_OFF);
+           if (timer_watchdog == TIMER_SELECT)
+           {
+               TA1CCTL0 = CCIE;
+               TA1CCTL1 = CCIE;
+               TA1CCTL2 = CCIE;
+               TA1CCR0 = TIMER1_PERIOD_3_2S - 1;
+               TA1CCR1 = TIMER1_PERIOD_1_6S - 1;
+               TA1CCR2 = TIMER1_PERIOD_0_8S- 1;
+               TA1CTL |= TACLR;
+           }
+           else
+           {
+               WDTCTL = WDTPW+WDTTMSEL+WDTCNTCL+WDTSSEL0+WDTIS1+WDTIS2;
+               SFRIE1 |= WDTIE;
+           }
+        }
+        b1_edge = EDGE_NONE;
+    }
+    else if (b1_state == BUTTON_PRESSED && b1_prev_state == BUTTON_UNPRESSED)
+    {
+        b1_edge = EDGE_RISING;
+    }
+    else if (b1_prev_state == BUTTON_PRESSED && b1_state == BUTTON_UNPRESSED)
+    {
+        b1_edge = EDGE_FALLING;
+    }
+    TA2CCTL0 &= ~CCIFG;
+}
+
+#pragma vector=TIMER1_A1_VECTOR
+__interrupt void TIMER1_A1_ISR(void)
+{
+    switch(__even_in_range(TA1IV,14))
+    {
+       case TA1IV_NONE:
+           break;                          // No interrupt
+       case TA1IV_TACCR1:
+           GPIO_WRITE_PIN(LED6_PORT, LED6_PIN, LED_ON);
+           TA1CCTL1 &= ~CCIE;
+           break;                          // CCR1
+       case TA1IV_TACCR2:
+           GPIO_WRITE_PIN(LED5_PORT, LED5_PIN, LED_ON);
+           TA1CCTL2 &= ~CCIE;
+           break;                          // CCR2
+       case TA1IV_TAIFG:
+           break;                  // overflow
+       default:
+           break;
+    }
+}
+
+#pragma vector=TIMER1_A0_VECTOR
+__interrupt void TIMER1_A0_ISR(void)
+{
+    GPIO_WRITE_PIN(LED7_PORT, LED7_PIN, LED_ON);
+    TA1CCTL0 &= ~CCIE;
+    TA1CCTL0 &= ~CCIFG;
+}
+
+#pragma vector = UNMI_VECTOR
+__interrupt void OSCILLATOR_FAULT_ISR(void)
+{
+    UCSCTL7 &= ~(XT1LFOFFG + DCOFFG);
+                                            // Clear XT2,XT1,DCO fault flags
+    SFRIFG1 &= ~OFIFG;                      // Clear fault flags
+}
+
+#pragma vector = WDT_VECTOR
+__interrupt void WDT_ISR(void)
+{
+    watchdog_count++;
+    if (watchdog_count == WATCHDOG_COUNT_0_8S)
+    {
+        GPIO_WRITE_PIN(LED5_PORT, LED5_PIN, LED_ON);
+    }
+    else if (watchdog_count == WATCHDOG_COUNT_1_6S)
+    {
+        GPIO_WRITE_PIN(LED6_PORT, LED6_PIN, LED_ON);
+    }
+    else if (watchdog_count == WATCHDOG_COUNT_3_2S)
+    {
+        GPIO_WRITE_PIN(LED7_PORT, LED7_PIN, LED_ON);
+        watchdog_count = 0;
+        SFRIE1 &= ~WDTIE;
+        SFRIFG1 &= ~WDTIFG;
+        WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
+    }
+
+}

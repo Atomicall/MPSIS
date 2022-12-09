@@ -1,0 +1,332 @@
+
+**** Build of configuration Debug for project lab6 ****
+
+"C:\\ti\\ccs1200\\ccs\\utils\\bin\\gmake" -k -j 8 all -O 
+ 
+Building file: "../CTS/structure.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="CTS/structure.d_raw" --obj_directory="CTS"  "../CTS/structure.c"
+Finished building: "../CTS/structure.c"
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+"../main.c", line 175: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 223: warning #770-D: conversion from pointer to smaller integer
+"../main.c", line 226: warning #770-D: conversion from pointer to smaller integer
+"../main.c", line 274: warning #176-D: expression has no effect
+"../main.c", line 282: warning #169-D: argument of type "uint8_t *" is incompatible with parameter of type "char *"
+"../main.c", line 307: warning #169-D: argument of type "volatile uint16_t *" is incompatible with parameter of type "void *"
+"../main.c", line 349: warning #169-D: argument of type "volatile uint16_t *" is incompatible with parameter of type "const void *"
+"../main.c", line 362: warning #770-D: conversion from pointer to smaller integer
+"../main.c", line 246: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 250: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 255: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 256: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 268: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 269: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 314: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../main.c", line 314: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../main.c", line 314: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../main.c", line 314: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../main.c", line 314: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../main.c", line 175 (col. 26): remark #1531-D: (ULP 5.2) Detected floating point operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+Finished building: "../main.c"
+ 
+Building file: "../CTS/CTS_HAL.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="CTS/CTS_HAL.d_raw" --obj_directory="CTS"  "../CTS/CTS_HAL.c"
+"../CTS/CTS_HAL.c", line 2557: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+Finished building: "../CTS/CTS_HAL.c"
+ 
+Building file: "../F5xx_F6xx_Core_Lib/HAL_PMAP.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="F5xx_F6xx_Core_Lib/HAL_PMAP.d_raw" --obj_directory="F5xx_F6xx_Core_Lib"  "../F5xx_F6xx_Core_Lib/HAL_PMAP.c"
+"../F5xx_F6xx_Core_Lib/HAL_PMAP.c", line 67: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../F5xx_F6xx_Core_Lib/HAL_PMAP.c", line 67: remark #1543-D: (ULP 12.2) Detected for loop with repetitive data transfer. Recommend using DMA
+Finished building: "../F5xx_F6xx_Core_Lib/HAL_PMAP.c"
+ 
+Building file: "../CTS/CTS_Layer.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="CTS/CTS_Layer.d_raw" --obj_directory="CTS"  "../CTS/CTS_Layer.c"
+"../CTS/CTS_Layer.c", line 357: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../CTS/CTS_Layer.c", line 359: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../CTS/CTS_Layer.c", line 362: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 363: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 363: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 431: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../CTS/CTS_Layer.c", line 448: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 458: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 459: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 465: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 466: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 475: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 491: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 501: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 502: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 508: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 509: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 519: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 532: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 533: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 534: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 534: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 537: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 538: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 539: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 539: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 543: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 547: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 548: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 549: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 549: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 553: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 557: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 558: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 559: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 559: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 565: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 574: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 581: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 600: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 601: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 601: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 601: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 604: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 605: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 605: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../CTS/CTS_Layer.c", line 605: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 612: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 620: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 627: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 706: remark #2553-D: (ULP 14.1) Array index (involving "index") of type "int". Recommend using "unsigned int"
+"../CTS/CTS_Layer.c", line 975: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../CTS/CTS_Layer.c", line 988: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+Finished building: "../CTS/CTS_Layer.c"
+ 
+Building file: "../F5xx_F6xx_Core_Lib/HAL_FLASH.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="F5xx_F6xx_Core_Lib/HAL_FLASH.d_raw" --obj_directory="F5xx_F6xx_Core_Lib"  "../F5xx_F6xx_Core_Lib/HAL_FLASH.c"
+"../F5xx_F6xx_Core_Lib/HAL_FLASH.c", line 57: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+Finished building: "../F5xx_F6xx_Core_Lib/HAL_FLASH.c"
+ 
+Building file: "../F5xx_F6xx_Core_Lib/HAL_TLV.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="F5xx_F6xx_Core_Lib/HAL_TLV.d_raw" --obj_directory="F5xx_F6xx_Core_Lib"  "../F5xx_F6xx_Core_Lib/HAL_TLV.c"
+Finished building: "../F5xx_F6xx_Core_Lib/HAL_TLV.c"
+ 
+Building file: "../F5xx_F6xx_Core_Lib/HAL_PMM.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="F5xx_F6xx_Core_Lib/HAL_PMM.d_raw" --obj_directory="F5xx_F6xx_Core_Lib"  "../F5xx_F6xx_Core_Lib/HAL_PMM.c"
+Finished building: "../F5xx_F6xx_Core_Lib/HAL_PMM.c"
+ 
+Building file: "../F5xx_F6xx_Core_Lib/HAL_UCS.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="F5xx_F6xx_Core_Lib/HAL_UCS.d_raw" --obj_directory="F5xx_F6xx_Core_Lib"  "../F5xx_F6xx_Core_Lib/HAL_UCS.c"
+"../F5xx_F6xx_Core_Lib/HAL_PMM.c", line 77: remark #1528-D: (ULP 3.1) Detected flag polling using PMMIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../F5xx_F6xx_Core_Lib/HAL_PMM.c", line 89: remark #1528-D: (ULP 3.1) Detected flag polling using PMMIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../F5xx_F6xx_Core_Lib/HAL_PMM.c", line 104: remark #1528-D: (ULP 3.1) Detected flag polling using PMMIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../F5xx_F6xx_Core_Lib/HAL_PMM.c", line 116: remark #1528-D: (ULP 3.1) Detected flag polling using PMMIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../F5xx_F6xx_Core_Lib/HAL_PMM.c", line 143: remark #1528-D: (ULP 3.1) Detected flag polling using PMMIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../F5xx_F6xx_Core_Lib/HAL_PMM.c", line 189: remark #1528-D: (ULP 3.1) Detected flag polling using PMMIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../F5xx_F6xx_Core_Lib/HAL_PMM.c", line 219: remark #1528-D: (ULP 3.1) Detected flag polling using PMMIFG. Recommend using an interrupt combined with enter LPMx and ISR
+Finished building: "../F5xx_F6xx_Core_Lib/HAL_UCS.c"
+ 
+Building file: "../FatFs/option/syscall.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="FatFs/option/syscall.d_raw" --obj_directory="FatFs/option"  "../FatFs/option/syscall.c"
+"../FatFs/option/syscall.c", line 15: warning #9-D: nested comment is not allowed
+"../FatFs/option/syscall.c", line 61: warning #9-D: nested comment is not allowed
+"../FatFs/option/syscall.c", line 63: warning #9-D: nested comment is not allowed
+Finished building: "../FatFs/option/syscall.c"
+ 
+Building file: "../MSP-EXP430F5529_HAL/HAL_Board.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="MSP-EXP430F5529_HAL/HAL_Board.d_raw" --obj_directory="MSP-EXP430F5529_HAL"  "../MSP-EXP430F5529_HAL/HAL_Board.c"
+Finished building: "../MSP-EXP430F5529_HAL/HAL_Board.c"
+ 
+Building file: "../MSP-EXP430F5529_HAL/HAL_AppUart.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="MSP-EXP430F5529_HAL/HAL_AppUart.d_raw" --obj_directory="MSP-EXP430F5529_HAL"  "../MSP-EXP430F5529_HAL/HAL_AppUart.c"
+"../MSP-EXP430F5529_HAL/HAL_AppUart.c", line 78: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_AppUart.c", line 91: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+Finished building: "../MSP-EXP430F5529_HAL/HAL_AppUart.c"
+ 
+Building file: "../FatFs/mmc.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="FatFs/mmc.d_raw" --obj_directory="FatFs"  "../FatFs/mmc.c"
+"../FatFs/mmc.c", line 39: remark #1535-D: (ULP 8.1) variable "tmr" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../FatFs/mmc.c", line 136: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../FatFs/mmc.c", line 193: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../FatFs/mmc.c", line 275: remark #1539-D: (ULP 11.1) Loop program control flow "d" compared against higher bits. Recommend compare against lower 4 bits to allow use of constant generators
+"../FatFs/mmc.c", line 345: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../FatFs/mmc.c", line 360: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../FatFs/mmc.c", line 375: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../FatFs/mmc.c", line 552: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+Finished building: "../FatFs/mmc.c"
+ 
+Building file: "../MSP-EXP430F5529_HAL/HAL_Buttons.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="MSP-EXP430F5529_HAL/HAL_Buttons.d_raw" --obj_directory="MSP-EXP430F5529_HAL"  "../MSP-EXP430F5529_HAL/HAL_Buttons.c"
+"../MSP-EXP430F5529_HAL/HAL_Buttons.c", line 178: remark #1538-D: (ULP 10.1) ISR Port2_ISR calls function Buttons_startWDT. Recommend moving function call away from ISR, or inlining the function, or using pragmas
+"../MSP-EXP430F5529_HAL/HAL_Buttons.c", line 269: remark #1538-D: (ULP 10.1) ISR Port1_ISR calls function Buttons_startWDT. Recommend moving function call away from ISR, or inlining the function, or using pragmas
+Finished building: "../MSP-EXP430F5529_HAL/HAL_Buttons.c"
+ 
+Building file: "../MSP-EXP430F5529_HAL/HAL_Cma3000.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="MSP-EXP430F5529_HAL/HAL_Cma3000.d_raw" --obj_directory="MSP-EXP430F5529_HAL"  "../MSP-EXP430F5529_HAL/HAL_Cma3000.c"
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 147: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 153: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 199: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 203: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 273: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 279: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 285: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 291: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 297: remark #1528-D: (ULP 3.1) Detected flag polling using UCBUSY. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 330: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 336: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 342: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 348: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Cma3000.c", line 354: remark #1528-D: (ULP 3.1) Detected flag polling using UCBUSY. Recommend using an interrupt combined with enter LPMx and ISR
+Finished building: "../MSP-EXP430F5529_HAL/HAL_Cma3000.c"
+ 
+Building file: "../MSP-EXP430F5529_HAL/HAL_Menu.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="MSP-EXP430F5529_HAL/HAL_Menu.d_raw" --obj_directory="MSP-EXP430F5529_HAL"  "../MSP-EXP430F5529_HAL/HAL_Menu.c"
+"../MSP-EXP430F5529_HAL/HAL_Menu.c", line 83: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+Finished building: "../MSP-EXP430F5529_HAL/HAL_Menu.c"
+ 
+Building file: "../MSP-EXP430F5529_HAL/HAL_Wheel.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="MSP-EXP430F5529_HAL/HAL_Wheel.d_raw" --obj_directory="MSP-EXP430F5529_HAL"  "../MSP-EXP430F5529_HAL/HAL_Wheel.c"
+"../MSP-EXP430F5529_HAL/HAL_Wheel.c", line 85: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../MSP-EXP430F5529_HAL/HAL_Wheel.c", line 87: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+Finished building: "../MSP-EXP430F5529_HAL/HAL_Wheel.c"
+ 
+Building file: "../MSP-EXP430F5529_HAL/HAL_SDCard.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="MSP-EXP430F5529_HAL/HAL_SDCard.d_raw" --obj_directory="MSP-EXP430F5529_HAL"  "../MSP-EXP430F5529_HAL/HAL_SDCard.c"
+"../MSP-EXP430F5529_HAL/HAL_SDCard.c", line 123: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_SDCard.c", line 125: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_SDCard.c", line 150: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_SDCard.c", line 153: remark #1528-D: (ULP 3.1) Detected flag polling using UCBUSY. Recommend using an interrupt combined with enter LPMx and ISR
+Finished building: "../MSP-EXP430F5529_HAL/HAL_SDCard.c"
+ 
+Building file: "../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="MSP-EXP430F5529_HAL/HAL_Dogs102x6.d_raw" --obj_directory="MSP-EXP430F5529_HAL"  "../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 342: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 397: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 410: remark #1528-D: (ULP 3.1) Detected flag polling using UCBUSY. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 474: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 484: remark #1528-D: (ULP 3.1) Detected flag polling using UCBUSY. Recommend using an interrupt combined with enter LPMx and ISR
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 441: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 464: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 687: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 691: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 750: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 806: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 809: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 809: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 810: remark #2553-D: (ULP 14.1) Array index (involving "b") of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 811: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 811: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 816: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 819: remark #2553-D: (ULP 14.1) Array index (involving "b") of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 960: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1002: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1004: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1064: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1069: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1163: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1167: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1181: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1186: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1197: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1201: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1396: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1420: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c", line 1423: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+Finished building: "../MSP-EXP430F5529_HAL/HAL_Dogs102x6.c"
+ 
+Building file: "../FatFs/ff.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --include_path="C:/ti/ccs1200/ccs/ccs_base/msp430/include" --include_path="D:/MPSiS - Copy/lab6/CTS" --include_path="D:/MPSiS - Copy/lab6/FatFs" --include_path="D:/MPSiS - Copy/lab6/F5xx_F6xx_Core_Lib" --include_path="D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" --include_path="D:/MPSiS - Copy/lab6" --include_path="C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="FatFs/ff.d_raw" --obj_directory="FatFs"  "../FatFs/ff.c"
+"../FatFs/ff.c", line 551: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../FatFs/ff.c", line 827: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 828: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 829: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 830: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 831: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 835: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 836: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 840: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 841: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 873: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 874: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 876: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 880: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 882: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 887: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 889: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 894: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 896: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 1079: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 1091: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 1094: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 1120: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 1128: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 1144: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 1161: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 1144: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 1144: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 1144: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 1144: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 1752: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 1752: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../FatFs/ff.c", line 1844: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 1859: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 2092: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2101: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2103: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2121: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2123: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2393: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2394: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2413: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2446: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2451: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2494: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2495: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2527: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2561: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2566: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2883: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2917: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2920: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 2924: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3588: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3589: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 3589: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../FatFs/ff.c", line 3592: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3597: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3604: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3608: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3609: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3621: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3630: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3645: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../FatFs/ff.c", line 3709: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 3724: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../FatFs/ff.c", line 466: remark #1534-D: (ULP 7.1) Detected use of global variable "Fsid" within one function "chk_mounted". Recommend placing variable in the function locally
+Finished building: "../FatFs/ff.c"
+ 
+Building target: "lab6.out"
+Invoking: MSP430 Linker
+"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/bin/cl430" -vmspx --data_model=restricted --use_hw_mpy=F5 --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 -z -m"lab6.map" --heap_size=160 --stack_size=160 --cinit_hold_wdt=on -i"C:/ti/ccs1200/ccs/ccs_base/msp430/include" -i"C:/ti/ccs1200/ccs/ccs_base/msp430/lib/5xx_6xx_FRxx" -i"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/lib" -i"C:/ti/ccs1200/ccs/tools/compiler/ti-cgt-msp430_21.6.0.LTS/include" -i"lab6/CTS" -i"D:/MPSiS - Copy/lab6/MSP-EXP430F5529_HAL" -i"lab6/F5xx_F6xx_Core_Lib" -i"lab6/FatFs" -i"lab6/MSP-EXP430F5529_HAL" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="lab6_linkInfo.xml" --use_hw_mpy=F5 --rom_model -o "lab6.out" "./main.obj" "./CTS/CTS_HAL.obj" "./CTS/CTS_Layer.obj" "./CTS/structure.obj" "./F5xx_F6xx_Core_Lib/HAL_FLASH.obj" "./F5xx_F6xx_Core_Lib/HAL_PMAP.obj" "./F5xx_F6xx_Core_Lib/HAL_PMM.obj" "./F5xx_F6xx_Core_Lib/HAL_TLV.obj" "./F5xx_F6xx_Core_Lib/HAL_UCS.obj" "./FatFs/ff.obj" "./FatFs/mmc.obj" "./FatFs/option/syscall.obj" "./MSP-EXP430F5529_HAL/HAL_AppUart.obj" "./MSP-EXP430F5529_HAL/HAL_Board.obj" "./MSP-EXP430F5529_HAL/HAL_Buttons.obj" "./MSP-EXP430F5529_HAL/HAL_Cma3000.obj" "./MSP-EXP430F5529_HAL/HAL_Dogs102x6.obj" "./MSP-EXP430F5529_HAL/HAL_Menu.obj" "./MSP-EXP430F5529_HAL/HAL_SDCard.obj" "./MSP-EXP430F5529_HAL/HAL_Wheel.obj" "../lnk_msp430f5529.cmd"  -llibmath.a -llibc.a 
+<Linking>
+Finished building target: "lab6.out"
+ 
+
+**** Build Finished ****

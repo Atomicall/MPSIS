@@ -1,0 +1,10 @@
+-----TI-REX started at Thu Sep 15 2022 23:09:09 GMT+0300 (RTZ 2 (зима))
+Thu, 15 Sep 2022 20:09:14 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:647:21
+55.255.0",
+        "family": "IPv4",
+        "mac": "0a:00:27:00:00:09",
+        "internal": false
+    }
+]
+-----TI-REX started at Thu Sep 15 2022 23:09:09 GMT+0300 (RTZ 2 (зима))
+TIREX server listening on port 55432

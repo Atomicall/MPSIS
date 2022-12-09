@@ -1,0 +1,105 @@
+#include <msp430.h>
+volatile long int sysMillis = 0;
+
+void setupPins()
+{
+    // Pot input
+
+    P8DIR |= BIT8;
+    P8OUT |= BIT8;
+    P6SEL |= BIT5;
+
+    //led 1 on p1.0
+    //out
+    P1DIR |= BIT1;
+    //off
+    P1OUT &= ~BIT1;
+
+    //led 3 on 1.2
+    //out
+    P1DIR |= BIT2;
+    //off
+    P1OUT &= ~BIT2;
+}
+
+void setupTimers()
+{
+    TA2CCR0 = 500 - 1;
+    // Разрешаем прерывание таймера по достижению значения TA1CCR0
+    TA2CCTL0 = CCIE;
+    // Настройка режима работы таймера Timer_A
+    TA2CTL = TASSEL__SMCLK | ID_1 | MC_1 | TACLR;
+    _enable_interrupt();
+}
+
+void setupADC(){
+
+    //select start scanning from 0
+        ADC12CTL1 |= ADC12SSEL0 | ADC12SSEL1;   //adc clock select (SMCLK)
+        ADC12CTL1 |= ADC12SHP;  //Pulse mode enable
+        ADC12CTL1 |= ADC12CONSEQ_0;   //single single mode select
+
+
+        ADC12CTL2 &= ~ADC12SR;  //set sample rate buffer to 50ksps
+        ADC12MCTL0 |= ADC12INCH_5;  // channel 0 config (select potentiometer as source)
+        // channel 1 config (select temp as source)
+        //set channel 1 as last for adc
+        ADC12MCTL1 |= ADC12EOS;
+        ADC12MCTL1 |= ADC12INCH_9;  //select channel source
+
+
+
+
+        ADC12CTL0 = ADC12SHT0_2 | ADC12SHT1_2| ADC12ON;
+        ADC12CTL1 |= ADC12SSEL0 | ADC12SSEL1;   //adc clock select (SMCLK)
+                ADC12CTL1 |= ADC12SHP;  //Pulse mode enable
+                ADC12CTL2 |= ADC12RES_2; // 12-bit conversion
+                ADC12IER0 |= ADC12IE0; // Interrupt MEM0
+
+
+}
+
+#pragma vector=ADC12_VECTOR
+__interrupt void adc_interrupt() {
+
+    short val_UREF = ADC12MEM1;     // читаем значение Vref
+    short val_potent = ADC12MEM0;   // читаем значение с потенциометра
+
+    if(val_UREF > val_potent) {     // если Vref больше
+        P1OUT |= BIT0;              // зажигаем led1
+        P8OUT &= ~BIT2;
+    }
+    else {                          // в противном случае
+        P1OUT &= ~BIT0;             // зажигаем led2
+        P8OUT |= BIT2;
+    }
+
+    ADC12IFG &= ~ADC12IFG1;         // сбрасываем флаг прерывания
+}
+
+
+
+// 1 ms interrupt
+#pragma vector = TIMER2_A0_VECTOR
+__interrupt void CCR0_ISR(void)
+{
+    sysMillis++;
+}
+
+void taskManager()
+{
+    return;
+}
+
+int main(void)
+{
+    WDTCTL = WDTPW | WDTHOLD;
+    setupPins();
+    setupTimers();
+    setupADC();
+    while (1)
+    {
+        taskManager();
+    }
+
+}

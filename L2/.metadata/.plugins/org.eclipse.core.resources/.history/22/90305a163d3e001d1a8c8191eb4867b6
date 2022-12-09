@@ -1,0 +1,208 @@
+#include <msp430.h>
+
+/**
+ * main.c
+ */
+
+volatile char bState = 0;
+volatile long int sysMillis = 0;
+// Led blink period
+volatile int period = 500;
+
+int leds[5] = { BIT1, BIT2, BIT3, BIT4, BIT5 };
+volatile int ledIndex = 0;
+void setupPins()
+{
+    // S1 input
+    P1DIR &= ~BIT7;
+    // pull enable
+    P1REN |= BIT7;
+    //pull-up
+    P1OUT |= BIT7;
+
+    //led 1 on p1.0
+    //out
+    P1DIR |= BIT1;
+    //off
+    P1OUT &= ~BIT1;
+
+    //led 2 on 1.1
+    //out
+    P1DIR |= BIT5;
+    //off
+    P1OUT &= ~BIT5;
+
+    //led 3 on 1.2
+    //out
+    P1DIR |= BIT2;
+    //off
+    P1OUT &= ~BIT2;
+    //led 3 on 1.3
+    //out
+    P1DIR |= BIT3;
+    //off
+    P1OUT &= ~BIT3;
+    //led 4 on 1.4
+    //out
+    P1DIR |= BIT4;
+    //off
+    P1OUT &= ~BIT4;
+}
+
+// т.к нет других входных clk
+// base MCLK = 1MHz
+// период в 1ms = 1000 тиков при предделителе 1,
+// значит TA1CCR0 = 500 при предделителе 2 - биты ID3 = 01
+
+// TASSEL__SMCLK 10
+// MC_1 = Управление режимом таймера = 01 - прямой счет до TA1CCR0
+// TACLR - начальное обнуление
+//
+
+void setupTimers()
+{
+    TA1CCR0 = 500 - 1;
+    // Разрешаем прерывание таймера по достижению значения TA1CCR0
+    TA1CCTL0 = CCIE;
+    // Настройка режима работы таймера Timer_A
+    TA1CTL = TASSEL__SMCLK | ID_1 | MC_1 | TACLR;
+    // настраиваем порт P1
+    // прерывание порта кнопки 1 - 0
+//    P1IES |= BIT7; // прерывание по переходу 1->0 выбирается битом IESx = 1.
+//    P1IFG &= ~BIT7; // Для предотвращения немедленного вызова прерывания,
+//    // разрешаем прерывание
+//    P1IE |= BIT7;
+    //__bis_SR_register(LPM0_bits + GIE);
+    _enable_interrupt();
+
+}
+
+//#pragma vector = PORT1_VECTOR
+//__interrupt void P1_7_ISR(void)
+//{
+//    static long int buttonPrevEntry = 0;
+//    //static char prevState = 1;
+//    //static char currState = 1;
+////    long int currEntry = sysMillis;
+//    P1IE &= ~BIT7;
+//    if (sysMillis - buttonPrevEntry <= debounce)
+//    {
+//
+//        P1IFG = 0;
+//        goto exit;
+//    }
+//    if (P1IFG & BIT7)
+//    {
+//        P1OUT ^= BIT1;
+//    }
+////    unsigned int t;
+////    for (t = 0; t < 30000; t++)
+//    exit: buttonPrevEntry = sysMillis;
+//    P1IE |= BIT7;
+//    P1IFG &= ~BIT7;
+//
+//    return;
+//
+//} // P1_7_ISR
+
+volatile char button_pressed, button_debounce_counter;
+volatile char buttonPrevState;
+volatile char wasChange = 0;
+volatile int DEBOUCE_TRESHOLD = 2;
+volatile int buttonPollPeriod = 5;
+
+volatile char ledOffPollPeriod = 100;
+
+volatile char ledsPrevStates[5] = { };
+
+// 1 ms interrupt
+#pragma vector = TIMER1_A0_VECTOR
+__interrupt void CCR0_ISR(void)
+{
+    static long int prevEntry = 0;
+    static long int prevButtonEntry = 0;
+    static long int prevLedsOffEntry = 0;
+    sysMillis++;
+    if (sysMillis - prevButtonEntry >= buttonPollPeriod)
+    {
+        prevButtonEntry = sysMillis;
+
+        if (!(P1IN & BIT7))
+        {
+            if (button_debounce_counter > DEBOUCE_TRESHOLD)
+            {
+                buttonPrevState = button_pressed;
+                button_pressed = 1;
+                button_debounce_counter = 0;
+            }
+            else
+            {
+                button_debounce_counter++;
+            }
+        }
+        else
+        {
+            button_debounce_counter = 0;
+            //buttonPrevState = button_pressed;
+            button_pressed = 0;
+        }
+        if (buttonPrevState != button_pressed)
+        {
+            wasChange = 1;
+        }
+        else
+        {
+            wasChange = 0;
+        }
+    }
+
+    if (sysMillis - prevEntry >= period && button_pressed)
+    {
+        if (wasChange == 1)
+        {
+            char i;
+            for (i = 0; i < 5; i++)
+            {
+                if (ledsPrevStates[i]){
+                    P1OUT |= leds[i];
+                }
+
+            }
+        }
+        prevEntry = sysMillis;
+        P1OUT ^= leds[ledIndex];
+        ledIndex++;
+        if (ledIndex > 4)
+            ledIndex = 0;
+    }
+
+   /* if (sysMillis - prevLedsOffEntry >= ledOffPollPeriod)
+    {
+        if (wasChange == 1 && !button_pressed)
+        {
+            char i;
+            for (i = 0; i < 5; i++)
+            {
+                ledsPrevStates[i] = P1IN & leds[i];
+            }
+            P1OUT &= ~BIT1;
+            P1OUT &= ~BIT2;
+            P1OUT &= ~BIT3;
+            P1OUT &= ~BIT4;
+            P1OUT &= ~BIT5;
+        }
+    }*/
+    return;
+} // CCR0_ISR
+
+int main(void)
+{
+    WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
+
+    setupPins();
+    setupTimers();
+
+    while (1)
+    {
+    }
+}

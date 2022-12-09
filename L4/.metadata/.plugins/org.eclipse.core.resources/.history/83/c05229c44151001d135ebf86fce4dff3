@@ -1,0 +1,56 @@
+#include <msp430.h>
+unsigned int ADC_value=0, ADC_value2=0;
+int main(void)
+{
+7
+// Disable Watchdog
+WDTCTL = WDTPW | WDTHOLD;
+// Enable changes to port registers
+PM5CTL0 &= ~LOCKLPM5;
+// Temperature Input Setup
+P1SEL1 |= BIT3; // Configure P1.3 for ADC
+P1SEL0 |= BIT3;
+// Light Sensor Input Setup
+P1SEL1 |= BIT4; // Configure P1.4 for ADC
+P1SEL0 |= BIT4;
+// Configure ADC12
+// Turn on ADC and enable multiple conversions
+ADC12CTL0 = ADC12SHT0_2 | ADC12ON | ADC12MSC;
+// Sampling timer, single sequence
+ADC12CTL1 |= ADC12SHP | ADC12CONSEQ_1;
+// 12-bit conversion
+ADC12CTL2 |= ADC12RES_2;
+// Enable ADC interrupt on MEM1
+ADC12IER0 |= ADC12IE1;
+// A3 select, Vref=1.2V
+ADC12MCTL0 |= ADC12INCH_3 | ADC12VRSEL_1;
+// A4 select, Vref=1.2V, End of Sequence
+ADC12MCTL1 |= ADC12INCH_4 | ADC12VRSEL_1 | ADC12EOS;
+while (1){
+ADC12CTL0 |= ADC12ENC | ADC12SC; // Sampling and conversion start
+__bis_SR_register(LPM0_bits + GIE); // LPM0, ADC12_ISR will force exit
+__no_operation(); // For debug only
+}
+}
+// ADC Vector function adapted from http://www.ti.com/lit/zip/slac536
+// using MSP430FR59xx_adc12_01.c
+// Written by: T. Witt / P. Thanigai, Texas Instruments Inc., November 2013
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector = ADC12_VECTOR
+__interrupt void ADC12_ISR(void)
+#elif defined(__GNUC__)
+void __attribute__ ((interrupt(ADC12_VECTOR))) ADC12_ISR (void)
+#else
+#error Compiler not supported!
+#endif
+{
+switch (__even_in_range(ADC12IV, ADC12IV_ADC12RDYIFG))
+{
+case ADC12IV_ADC12IFG1: // ADC12MEM1 Interrupt
+ADC_value = ADC12MEM0; // Save MEM0
+ADC_value2 = ADC12MEM1; // Save MEM1
+__bic_SR_register_on_exit(LPM0_bits | GIE); // Exit CPU, clear interrupts
+break;
+default: break;
+}
+}
